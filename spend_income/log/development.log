@@ -1,0 +1,249 @@
+  [1m[35m (292.8ms)[0m  [1m[35mCREATE DATABASE "spend_income_development" ENCODING = 'unicode'[0m
+  [1m[35m (56.5ms)[0m  [1m[35mCREATE DATABASE "spend_income_test" ENCODING = 'unicode'[0m
+  [1m[35m (74.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (25.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (18.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4171166815093742205)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSpends (20200812174603)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (29.7ms)[0m  [1m[35mCREATE TABLE "spends" ("id" bigserial primary key, "category" character varying, "amount" decimal(8,2), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (3.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200812174603"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateIncomes (20200812174649)
+  [1m[35m (5.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.2ms)[0m  [1m[35mCREATE TABLE "incomes" ("id" bigserial primary key, "amount" decimal(8,2), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200812174649"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (12.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-08-12 17:46:57.726007"], ["updated_at", "2020-08-12 17:46:57.726007"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4171166815093742205)[0m
+  [1m[35m (6.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-08-12 16:29:30 -0400
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Library/Ruby/Gems/2.6.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Library/Ruby/Gems/2.6.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.8ms | Allocations: 478)
+Completed 200 OK in 16ms (Views: 11.5ms | ActiveRecord: 0.0ms | Allocations: 2618)
+
+
+Started GET "/favicon.ico" for ::1 at 2020-08-12 16:29:31 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/songs" for ::1 at 2020-08-12 16:29:34 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/songs"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/spend" for ::1 at 2020-08-12 16:29:35 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/spend"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/spends" for ::1 at 2020-08-12 16:29:38 -0400
+Processing by SpendsController#index as HTML
+  [1m[36mSpend Load (12.1ms)[0m  [1m[34mSELECT "spends".* FROM "spends"[0m
+  ↳ app/controllers/spends_controller.rb:8:in `index'
+Completed 200 OK in 19ms (Views: 0.1ms | ActiveRecord: 13.7ms | Allocations: 1677)
+
+
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSpend Create (1.9ms)[0m  [1m[32mINSERT INTO "spends" ("category", "amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Grocery"], ["amount", "19.99"], ["created_at", "2020-08-12 20:30:19.303714"], ["updated_at", "2020-08-12 20:30:19.303714"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSpend Create (0.3ms)[0m  [1m[32mINSERT INTO "spends" ("category", "amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Grocery"], ["amount", "13.99"], ["created_at", "2020-08-12 20:30:19.315012"], ["updated_at", "2020-08-12 20:30:19.315012"]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSpend Create (0.3ms)[0m  [1m[32mINSERT INTO "spends" ("category", "amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Gas/Transportation"], ["amount", "40.68"], ["created_at", "2020-08-12 20:30:19.323478"], ["updated_at", "2020-08-12 20:30:19.323478"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSpend Create (0.5ms)[0m  [1m[32mINSERT INTO "spends" ("category", "amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Food/Restaurants"], ["amount", "50.0"], ["created_at", "2020-08-12 20:30:19.333207"], ["updated_at", "2020-08-12 20:30:19.333207"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mIncome Create (2.1ms)[0m  [1m[32mINSERT INTO "incomes" ("amount", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["amount", "200.0"], ["created_at", "2020-08-12 20:30:19.344863"], ["updated_at", "2020-08-12 20:30:19.344863"]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mIncome Create (0.3ms)[0m  [1m[32mINSERT INTO "incomes" ("amount", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["amount", "30.0"], ["created_at", "2020-08-12 20:30:19.355113"], ["updated_at", "2020-08-12 20:30:19.355113"]]
+  [1m[35m (5.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/spends" for ::1 at 2020-08-12 16:30:21 -0400
+Processing by SpendsController#index as HTML
+  [1m[36mSpend Load (7.1ms)[0m  [1m[34mSELECT "spends".* FROM "spends"[0m
+  ↳ app/controllers/spends_controller.rb:8:in `index'
+Completed 200 OK in 28ms (Views: 0.1ms | ActiveRecord: 10.5ms | Allocations: 4413)
+
+
+Started GET "/" for ::1 at 2020-08-12 16:30:26 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Library/Ruby/Gems/2.6.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Library/Ruby/Gems/2.6.0/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.8ms | Allocations: 195)
+Completed 200 OK in 9ms (Views: 7.8ms | ActiveRecord: 0.0ms | Allocations: 734)
+
+
+Started GET "/incomes" for ::1 at 2020-08-12 16:30:30 -0400
+Processing by IncomesController#index as HTML
+  [1m[36mIncome Load (0.4ms)[0m  [1m[34mSELECT "incomes".* FROM "incomes"[0m
+  ↳ app/controllers/incomes_controller.rb:8:in `index'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 3.4ms | Allocations: 3647)
+
+
+Started GET "/spends" for ::1 at 2020-08-12 16:30:52 -0400
+Processing by SpendsController#index as */*
+  Parameters: {"song"=>{"title"=>"Hotel California", "artist"=>"Eagles", "duration"=>"6:30", "favorite"=>"false"}}
+  [1m[36mSpend Load (0.4ms)[0m  [1m[34mSELECT "spends".* FROM "spends"[0m
+  ↳ app/controllers/spends_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1170)
+
+
+Started POST "/spends" for ::1 at 2020-08-12 16:32:17 -0400
+Processing by SpendsController#create as */*
+  Parameters: {"spends"=>{"category"=>"Grocery", "amount"=>"5.85"}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 133)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: spend):
+  
+app/controllers/spends_controller.rb:49:in `spend_params'
+app/controllers/spends_controller.rb:18:in `create'
+Started GET "/spends" for ::1 at 2020-08-12 16:32:30 -0400
+Processing by SpendsController#index as */*
+  Parameters: {"spends"=>{"category"=>"Grocery", "amount"=>"5.85"}}
+  [1m[36mSpend Load (0.4ms)[0m  [1m[34mSELECT "spends".* FROM "spends"[0m
+  ↳ app/controllers/spends_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1168)
+
+
+Started POST "/spends" for ::1 at 2020-08-12 16:32:44 -0400
+Processing by SpendsController#create as */*
+  Parameters: {"spends"=>{"category"=>"Grocery", "amount"=>"5.85"}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 122)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: spend):
+  
+app/controllers/spends_controller.rb:49:in `spend_params'
+app/controllers/spends_controller.rb:18:in `create'
+Started POST "/spends" for ::1 at 2020-08-12 16:32:54 -0400
+Processing by SpendsController#create as */*
+  Parameters: {"spend"=>{"category"=>"Grocery", "amount"=>"5.85"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/spends_controller.rb:20:in `create'
+  [1m[36mSpend Create (0.7ms)[0m  [1m[32mINSERT INTO "spends" ("category", "amount", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Grocery"], ["amount", "5.85"], ["created_at", "2020-08-12 20:32:54.084893"], ["updated_at", "2020-08-12 20:32:54.084893"]]
+  ↳ app/controllers/spends_controller.rb:20:in `create'
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/spends_controller.rb:20:in `create'
+Completed 201 Created in 10ms (Views: 0.5ms | ActiveRecord: 6.2ms | Allocations: 2807)
+
+
+Started GET "/spends" for ::1 at 2020-08-12 16:32:58 -0400
+Processing by SpendsController#index as */*
+  Parameters: {"spend"=>{"category"=>"Grocery", "amount"=>"5.85"}}
+  [1m[36mSpend Load (0.3ms)[0m  [1m[34mSELECT "spends".* FROM "spends"[0m
+  ↳ app/controllers/spends_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1289)
+
+
+Started GET "/incomes" for ::1 at 2020-08-12 16:33:06 -0400
+Processing by IncomesController#index as */*
+  Parameters: {"spend"=>{"category"=>"Grocery", "amount"=>"5.85"}}
+  [1m[36mIncome Load (0.8ms)[0m  [1m[34mSELECT "incomes".* FROM "incomes"[0m
+  ↳ app/controllers/incomes_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.8ms | Allocations: 911)
+
+
+Started GET "/incomes" for ::1 at 2020-08-12 16:33:18 -0400
+Processing by IncomesController#index as */*
+  Parameters: {"income"=>{"amount"=>"10"}}
+  [1m[36mIncome Load (0.3ms)[0m  [1m[34mSELECT "incomes".* FROM "incomes"[0m
+  ↳ app/controllers/incomes_controller.rb:8:in `index'
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 896)
+
+
+Started POST "/incomes" for ::1 at 2020-08-12 16:33:23 -0400
+Processing by IncomesController#create as */*
+  Parameters: {"income"=>{"amount"=>"10"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/incomes_controller.rb:20:in `create'
+  [1m[36mIncome Create (0.4ms)[0m  [1m[32mINSERT INTO "incomes" ("amount", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["amount", "10.0"], ["created_at", "2020-08-12 20:33:23.938188"], ["updated_at", "2020-08-12 20:33:23.938188"]]
+  ↳ app/controllers/incomes_controller.rb:20:in `create'
+  [1m[35m (13.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/incomes_controller.rb:20:in `create'
+Completed 201 Created in 17ms (Views: 0.6ms | ActiveRecord: 14.3ms | Allocations: 2543)
+
+
+Started GET "/incomes" for ::1 at 2020-08-12 16:33:27 -0400
+Processing by IncomesController#index as */*
+  Parameters: {"income"=>{"amount"=>"10"}}
+  [1m[36mIncome Load (0.3ms)[0m  [1m[34mSELECT "incomes".* FROM "incomes"[0m
+  ↳ app/controllers/incomes_controller.rb:8:in `index'
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 1003)
+
+
